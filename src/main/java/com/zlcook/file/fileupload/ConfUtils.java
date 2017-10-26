@@ -2,6 +2,8 @@ package com.zlcook.file.fileupload;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 
 /**
@@ -14,6 +16,8 @@ public class ConfUtils {
      * 文件保存路径
      */
     private static Properties config = new Properties();
+
+    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
     /**
      * 加载存放网页地址的文件
      */
@@ -37,6 +41,14 @@ public class ConfUtils {
         String path = config.getProperty("save.path");
         if(null == path || path.trim().length()==0)
             return DEFAULT_SAVTH_PATH;
-        return  path;
+        return  path + generateSubDirName();
+    }
+
+    /**
+     * 二级存储目录名称
+     * @return
+     */
+    public static String generateSubDirName(){
+         return sdf.format(new Date());
     }
 }
