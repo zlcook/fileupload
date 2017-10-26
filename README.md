@@ -1,6 +1,7 @@
 
 # 配置文件
 * 位置：fileupload/src/main/resources/conf.properties
+* war包部署后的位置：fileupload\WEB-INF\classes\conf.properties
 * 配置了文件存储路径和上传文件大小
 
 # 上传文件接口
