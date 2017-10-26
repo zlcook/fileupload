@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+		  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+    <!-- Common -->
+    <context:component-scan base-package="com.zlcook.file.fileupload"> </context:component-scan>
+    <context:annotation-config/>
+
+    <!-- Properties -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath:conf.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 处理文件上传 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
+        <property name="defaultEncoding" value="UTF-8"/> <!-- 默认编码 (ISO-8859-1)   -->
+        <property name="maxInMemorySize" value="10240"/> <!-- 最大内存大小 (10240)   -->
+        <property name="uploadTempDir" value="/temp"/>   <!-- 上传文件的临时路径,上传完成后，临时目录中的临时文件会被自动清除   -->
+        <property name="maxUploadSize" value="${file.maxsize}"/><!--  最大文件大小5M,-1为无限止(-1)   -->
+    </bean>
+</beans>
